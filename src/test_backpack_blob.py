@@ -2,11 +2,20 @@
 
 import cv2 
 import numpy as np
+import os 
 
 
 # HSV filter
 redLow = np.array([0, 160, 5])
 redHigh = np.array([180, 255, 255])
+
+
+imageCount = 0
+
+# r in front of string makes it a raw string, treats everything as a character
+# likely not necessary as / does not signify escape sequence
+writeImageDirectory = r'../images/blobs_found/'
+writeImageFileName = r'blob'
 
 
 # path  
@@ -17,7 +26,6 @@ try:
    frame = cv2.imread(path)
 except cv2.error as e:
    print('imread failure') 
-
 
 # convert to hsv color space
 hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -45,7 +53,7 @@ params.maxThreshold = 255
 
 # filter by area
 params.filterByArea = True
-params.minArea = 30           # pixels
+params.minArea = 100           # pixels
 
 
 # filter by circularity
@@ -79,6 +87,17 @@ else:
 
 # Draw green circles around detected blobs
 im_with_keypoints = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,255,0), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+
+# Draw text on image
+text = "Number of Circular Blobs: " + str(len(keypoints)) 
+cv2.putText(im_with_keypoints, text, (20, 300), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 100, 255), 2) 
+
+
+if keypoints:
+   filename = writeImageFileName + str(imageCount) + ".jpg"
+   cv2.imwrite(os.path.join(writeImageDirectory, filename), im_with_keypoints)
+   imageCount += 1
 
 
 # open windows with original image, mask, and image with keypoints marked
