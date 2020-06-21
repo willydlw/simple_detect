@@ -87,7 +87,6 @@ class BlobDetect(object):
       # Draw text on image
       text = "Number Blobs: " + str(len(keypoints)) 
       cv2.putText(im_with_keypoints, text, (20, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 100, 255), 2) 
-      
 
       if keypoints:
          filename = self.writeImageFileName + str(self.imageCount) + ".jpg"
