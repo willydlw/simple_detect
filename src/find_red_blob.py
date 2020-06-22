@@ -88,6 +88,16 @@ class BlobDetect(object):
       text = "Number Blobs: " + str(len(keypoints)) 
       cv2.putText(im_with_keypoints, text, (20, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 100, 255), 2) 
 
+      # draw white circle in center of blob
+      for k in keypoints:
+         x = k.pt[0]
+         y = k.pt[1]
+         print('blob center, x: %u, y: %u' % (x,y))
+         # draw a circle to show blob centerpoint x,y
+         # cv2.circle(image, center coordinates, radius, color, thickness)
+         im_with_keypoints = cv2.circle(im_with_keypoints, (int(x),int(y)), 5, (255,255,255), 2)
+
+      # write images to files
       if keypoints:
          filename = self.writeImageFileName + str(self.imageCount) + ".jpg"
          cv2.imwrite(os.path.join(self.writeImageDirectory, filename), im_with_keypoints)

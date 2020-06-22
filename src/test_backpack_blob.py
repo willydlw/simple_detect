@@ -85,12 +85,25 @@ if keypoints:
 else:
    print "no blobs"
 
+
+
+
 # Draw green circles around detected blobs
 im_with_keypoints = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,255,0), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 
+for k in keypoints:
+   x = k.pt[0]
+   y = k.pt[1]
+   print('blob center, x: %u, y: %u' % (x,y))
+   # draw a circle to show blob centerpoint x,y
+   # cv2.circle(image, center coordinates, radius, color, thickness)
+   im_with_keypoints = cv2.circle(im_with_keypoints, (int(x),int(y)), 5, (255,255,255), 2)
+
+
+
 # Draw text on image
-text = "Number of Circular Blobs: " + str(len(keypoints)) 
+text = "Number of Red Blobs: " + str(len(keypoints)) 
 cv2.putText(im_with_keypoints, text, (20, 300), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 100, 255), 2) 
 
 
