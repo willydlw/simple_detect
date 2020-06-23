@@ -23,6 +23,20 @@ class BlobDetect(object):
    SAT_MAX = rospy.get_param('blob_detect/sat_max')
    VAL_MAX = rospy.get_param('blob_detect/val_max')
 
+   # Blob detect parameters
+   MIN_THRESHOLD = rospy.get_param('blob_detect/min_threshold')
+   MAX_THRESHOLD = rospy.get_param('blob_detect/max_threshold')
+
+   FILTER_BY_AREA = rospy.get_param('blob_detect/filterByArea')
+   MIN_AREA = rospy.get_param('blob_detect/minArea')
+
+   FILTER_BY_CIRCULARITY = rospy.get_param('blob_detect/filterByCircularity')
+   MIN_CIRCULARITY = rospy.get_param('blob_detect/minCircularity')
+
+   FILTER_BY_INERTIA = rospy.get_param('blob_detect/filterByInertia')
+   MIN_INERTIA_RATIO = rospy.get_param('blob_detect/minInertiaRatio')
+   MAX_INERTIA_RATIO = rospy.get_param('blob_detect/maxInertiaRatio')
+
    def __init__(self):
 
       self.bridge_object = CvBridge() 
@@ -56,12 +70,12 @@ class BlobDetect(object):
       # image which falls into the grayscale range 0-255
       # Values including and below the minThreshold are set to zero. 
       # values above the maxThreshold are set to zero
-      params.minThreshold = 0
-      params.maxThreshold = 255
+      params.minThreshold = self.MIN_THRESHOLD
+      params.maxThreshold = self.MAX_THRESHOLD
 
       # filter by area
-      params.filterByArea = True
-      params.minArea = 100           # pixels
+      params.filterByArea = self.FILTER_BY_AREA
+      params.minArea = self.MIN_AREA           # pixels
 
 
       # filter by circularity
@@ -69,14 +83,14 @@ class BlobDetect(object):
       # Circle is 1. Square is 0.785.
       # Jansport Big Student backpack, color redtape 
       # 13 x 9.8 x 16.9 inches
-      params.filterByCircularity = True 
-      params.minCircularity = 0.7 
+      params.filterByCircularity = self.FILTER_BY_CIRCULARITY
+      params.minCircularity = self.MIN_CIRCULARITY 
 
 
       # filter by inertia ratio: lines have inertial 0, circles 1
-      params.filterByInertia = True 
-      params.minInertiaRatio = 0.3
-      params.maxInertiaRatio = 1.0
+      params.filterByInertia = self.FILTER_BY_INERTIA
+      params.minInertiaRatio = self.MIN_INERTIA_RATIO
+      params.maxInertiaRatio = self.MAX_INERTIA_RATIO
 
 
       detector = cv2.SimpleBlobDetector_create(params)

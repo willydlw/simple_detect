@@ -1,6 +1,6 @@
 scan_topic: /X1/front/image_raw
 
-# hsv min, max values
+# hsv min, max values for inRange filter
 hue_min: 0
 sat_min: 160
 val_min: 5
@@ -8,3 +8,26 @@ val_min: 5
 hue_max: 180
 sat_max: 255
 val_max: 255
+
+# blob detect parameters
+min_threshold: 0
+max_threshold: 255
+
+# filter by area
+filterByArea: True
+minArea: 100      
+
+
+# filter by circularity
+# circularity is defined as ( 4 pi area) / perimeter^2
+# Circle is 1. Square is 0.785.
+# Jansport Big Student backpack, color redtape 
+# 13 x 9.8 x 16.9 inches
+filterByCircularity: True 
+minCircularity: 0.7 
+
+
+# filter by inertia ratio: lines have inertial 0, circles 1
+filterByInertia: True 
+minInertiaRatio: 0.3
+maxInertiaRatio: 1.0
