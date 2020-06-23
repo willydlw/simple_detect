@@ -120,7 +120,7 @@ The color filter did appear to detect the red backpack in tunnel practice 1. An 
 <br><br>
 
 #### ToDo
-- Add blob detection
+- Topic is hard-coded in parameter file. Example: "/X1/front/image_raw". Some sensor configurations have multiple cameras and additional topics. Need a scheme for how robots will be launched with the ability to pass arguments such as "/X1/front" to the program.
 - Use depth image stream to estimate blob pixel locations relative to robot
 - Add artifact report
 - Test, accumulate data to see how well backpack is detected
