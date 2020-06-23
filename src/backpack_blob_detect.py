@@ -37,6 +37,8 @@ class BlobDetect(object):
    MIN_INERTIA_RATIO = rospy.get_param('blob_detect/minInertiaRatio')
    MAX_INERTIA_RATIO = rospy.get_param('blob_detect/maxInertiaRatio')
 
+   SAVE_IMAGES = rospy.get_param('blob_detect/saveImages')
+
    def __init__(self):
 
       self.bridge_object = CvBridge() 
@@ -55,11 +57,11 @@ class BlobDetect(object):
          print(e)
 
       hsv_frame = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
-      red_mask = cv2.inRange(hsv_frame, self.redMin, self.redMax)
-      red_frame = cv2.bitwise_and(cv_image, cv_image, mask=red_mask)
+      inRange_mask = cv2.inRange(hsv_frame, self.redMin, self.redMax)
+      inRange_frame = cv2.bitwise_and(cv_image, cv_image, mask=inRange_mask)
 
       # make inRange areas larger (fills in missing white pixels)
-      dilated_mask = cv2.dilate(red_mask, None, iterations=1)
+      dilated_mask = cv2.dilate(inRange_mask, None, iterations=1)
 
       # set up blob detector parameters
       # TODO: do we have to set up these parameters each time?
@@ -124,7 +126,7 @@ class BlobDetect(object):
          im_with_keypoints = cv2.circle(im_with_keypoints, (int(x),int(y)), 5, (255,255,255), 2)
 
       # write images to files
-      if keypoints:
+      if keypoints and self.SAVE_IMAGES:
          filename = self.writeImageFileName + str(self.imageCount) + ".jpg"
          cv2.imwrite(os.path.join(self.writeImageDirectory, filename), im_with_keypoints)
          cv2.imwrite(filename, im_with_keypoints)
@@ -134,7 +136,7 @@ class BlobDetect(object):
       # display images
       cv2.imshow("original", cv_image)
       cv2.imshow("dilated mask", dilated_mask)
-      cv2.imshow("red", red_frame)
+      cv2.imshow("inRange", inRange_frame)
       cv2.imshow("keypoints", im_with_keypoints)   
 
       # imshow should be followed by waitKey or image will not be displayed

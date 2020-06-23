@@ -31,3 +31,6 @@ minCircularity: 0.7
 filterByInertia: True 
 minInertiaRatio: 0.3
 maxInertiaRatio: 1.0
+
+# when true, will save image with detected blobs outlined
+saveImages: False 
