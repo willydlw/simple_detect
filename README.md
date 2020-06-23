@@ -82,9 +82,9 @@ Calculates values for the blob detection circularity parameter setting. The back
 
 <br><br>
 
-## find_red_blob.py
+## backpack_blob_detect.py
 
-This program may be run with any of the simulation worlds. It is currently hard-coded to /X1/front/image_raw video stream. This will be changed shortly, to allow a parameter to be passed for any of the robots.
+This program may be run with any of the simulation worlds. The backpack_params.yaml is currently hard-coded to /X1/front/image_raw video stream. This will be changed shortly, to allow an argument or parameter to be passed for any of the robots and other camera names.
 
 The program uses the inRange filter to search for the red color in an attempt to identify the red backpack. See the ToDo list below for planned updates to the source code.
 
@@ -99,7 +99,7 @@ ign launch -v 4 tunnel_circuit_practice.ign worldName:=tunnel_circuit_practice_0
 
 ```
 source ~/catkin_ws/devel/setup.bash
-rosrun simple_detect find_red_blob.py
+roslaunch simple_detect backpack_detect.launch
 ```
 
 <br>
