@@ -1,0 +1,10 @@
+scan_topic: /X1/front/image_raw
+
+# hsv min, max values
+hue_min: 0
+sat_min: 160
+val_min: 5
+
+hue_max: 180
+sat_max: 255
+val_max: 255

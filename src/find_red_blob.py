@@ -11,13 +11,25 @@ from sensor_msgs.msg import Image
 
 class BlobDetect(object):
 
+   # Import ROS parameters from the "params.yaml" file.
+   # Access these variables in class functions with self:
+   # i.e. self.CONSTANT
+   SCAN_TOPIC = rospy.get_param('blob_detect/scan_topic')
+   HUE_MIN = rospy.get_param('blob_detect/hue_min')
+   SAT_MIN = rospy.get_param('blob_detect/sat_min')
+   VAL_MIN = rospy.get_param('blob_detect/val_min')
+
+   HUE_MAX = rospy.get_param('blob_detect/hue_max')
+   SAT_MAX = rospy.get_param('blob_detect/sat_max')
+   VAL_MAX = rospy.get_param('blob_detect/val_max')
+
    def __init__(self):
 
       self.bridge_object = CvBridge() 
-      self.image_sub = rospy.Subscriber("/X1/front/image_raw", Image, self.camera_callback)
+      self.image_sub = rospy.Subscriber(self.SCAN_TOPIC, Image, self.camera_callback)
 
-      self.redMin = np.array([0, 160, 5])
-      self.redMax = np.array([180, 255, 255])
+      self.redMin = np.array([self.HUE_MIN, self.SAT_MIN, self.VAL_MIN])
+      self.redMax = np.array([self.HUE_MAX, self.SAT_MAX, self.VAL_MAX])
       self.writeImageDirectory = 'home/catkin_ws/src/simple_detect/images/blobs_found/'
       self.writeImageFileName = 'blob'
       self.imageCount = 0

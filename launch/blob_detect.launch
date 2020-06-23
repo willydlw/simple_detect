@@ -1,0 +1,7 @@
+<launch>
+  <!-- Launch blob detector with parameters -->
+  <node pkg="simple_detect" name="blob_detect" type="find_red_blob.py" output="screen">
+   <rosparam command="load" file="$(find simple_detect)/config/backpack_blob_params.yaml"/>
+ </node>
+
+</launch>
