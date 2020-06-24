@@ -1,4 +1,4 @@
-scan_topic: /X1/front/image_raw
+scan_topic: "/X1/front/image_raw"
 
 # hsv min, max values for inRange filter
 hue_min: 0
