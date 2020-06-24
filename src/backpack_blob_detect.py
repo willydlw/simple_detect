@@ -143,13 +143,11 @@ class BlobDetect(object):
       # displays image for specified milliseconds 
       cv2.waitKey(1)
 
-def myshutdown():
-   print 'ros shutting down'
       
 def main():
    blob = BlobDetect()
    rospy.init_node("blob_detect_node", anonymous=True)
-   rospy.on_shutdown(myshutdown)
+   
    while not rospy.is_shutdown():
       try:
          rospy.spin()
