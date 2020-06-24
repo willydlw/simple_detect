@@ -119,6 +119,31 @@ The color filter did appear to detect the red backpack in tunnel practice 1. An 
 
 <br><br>
 
+## ros_inRange_sliders.py
+
+Program provides trackbar sliders to allow use to see effects of various range filter values while simulation is running. Specify HSV or RGB filtering in launch file.
+
+#### Program Execution
+
+Start the subt simulation with any of the practice worlds and then run the python program. Press ctrl+c to end. Trackbar values are written to a file when program terminates.
+
+```
+source ~/subt_ws/install/setup.bash
+ign launch -v 4 tunnel_circuit_practice.ign worldName:=tunnel_circuit_practice_01 robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_1
+```
+
+```
+source ~/catkin_ws/devel/setup.bash
+roslaunch simple_detect inRange_sliders.launch
+```
+<br>
+
+#### Example Output, 6/23/2020
+
+![Interactive trackbar sliders](./images/test_trackbar_sliders.png "trackbar sliders")
+
+<br><br><br>
+
 #### ToDo
 - Topic is hard-coded in parameter file. Example: "/X1/front/image_raw". Some sensor configurations have multiple cameras and additional topics. Need a scheme for how robots will be launched with the ability to pass arguments such as "/X1/front" to the program.
 - Use depth image stream to estimate blob pixel locations relative to robot
