@@ -1,0 +1,7 @@
+<launch>
+  <!-- Launch blob detector with parameters -->
+  <node pkg="simple_detect" name="color_filter" type="ros_inRange_sliders.py" output="screen">
+   <rosparam command="load" file="$(find simple_detect)/config/inRange_params.yaml"/>
+ </node>
+
+</launch>
