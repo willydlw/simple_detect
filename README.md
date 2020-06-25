@@ -129,7 +129,7 @@ Start the subt simulation with any of the practice worlds and then run the pytho
 
 ```
 source ~/subt_ws/install/setup.bash
-ign launch -v 4 tunnel_circuit_practice.ign worldName:=tunnel_circuit_practice_01 robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_1
+ign launch -v 4 cave_circuit.ign worldName:=simple_cave_01 robotName1:=X1 robotConfig1:=X1_SENSOR_CONFIG_1
 ```
 
 ```
